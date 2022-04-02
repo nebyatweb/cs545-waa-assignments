@@ -1,9 +1,9 @@
-package edu.miu.user.domain.dto;
+package edu.miu.comment.domain.dto;
 
 import lombok.Data;
 
 @Data
-public class UserDto {
+public class CommentDto {
     private long id;
     private String name;
 

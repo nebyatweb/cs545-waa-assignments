@@ -1,4 +1,4 @@
-package edu.miu.user.domain.dto;
+package edu.miu.comment.domain.dto;
 
 import lombok.Data;
 
@@ -6,5 +6,4 @@ import lombok.Data;
 public class UserDto {
     private long id;
     private String name;
-
 }
