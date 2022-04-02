@@ -51,4 +51,8 @@ public class UserServiceImpl implements UserService {
     public void delete(int id) {
         userRepo.deleteById(id);
     }
+
+    public List<UserDto> findUsersByNumberOfPosts(int n){
+        return listMapper.mapList(userRepo.findByPostsGreaterThan(n), new PostDto());
+    }
 }

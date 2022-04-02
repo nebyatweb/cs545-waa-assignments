@@ -12,4 +12,5 @@ public interface UserService {
     UserDto findById(int id);
     List<PostDto> findPostById(int id);
     void delete(int id);
+    List<UserDto> findUsersByNumberOfPosts(int n);
 }
