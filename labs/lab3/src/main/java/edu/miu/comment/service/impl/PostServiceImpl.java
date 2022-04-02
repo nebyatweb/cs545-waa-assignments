@@ -30,4 +30,9 @@ public class PostServiceImpl implements PostService {
     public void addPost(Post p) {
         postRepo.save(p);
     }
+
+    @Override
+    public List<PostDto> getPostsByTitle(String title) {
+        return (List<PostDto>)listMapperPostToDto.mapList(postRepo.findAllByTitle(title), new PostDto());
+    }
 }

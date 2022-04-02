@@ -44,7 +44,7 @@ public class UserController {
         userService.delete(id);
     }
 
-    @GetMapping
+    @GetMapping("/posts")
     public List<UserDto> getUsersByNumberOfPosts(@RequestParam int n){
         return userService.findUsersByNumberOfPosts(n);
     }

@@ -53,6 +53,6 @@ public class UserServiceImpl implements UserService {
     }
 
     public List<UserDto> findUsersByNumberOfPosts(int n){
-        return listMapper.mapList(userRepo.findByPostsGreaterThan(n), new PostDto());
+        return listMapper.mapList(userRepo.findByPostsGreaterThan(n), new UserDto());
     }
 }

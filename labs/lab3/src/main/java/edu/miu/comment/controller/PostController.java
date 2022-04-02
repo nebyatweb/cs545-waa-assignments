@@ -25,4 +25,10 @@ public class PostController {
     public void addPosts(@RequestBody Post p) {
         postService.addPost(p);
     }
+
+    @GetMapping("/title")
+    public List<PostDto> getPostsByTitle(String s)
+    {
+        return postService.getPostsByTitle(s);
+    }
 }
