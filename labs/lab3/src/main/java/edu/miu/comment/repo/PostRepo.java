@@ -10,5 +10,5 @@ import java.util.List;
 public interface PostRepo extends CrudRepository<Post, Integer> {
     List<Post> findAll();
 //    @Query("SELECT p FROM Post p WHERE p.title = :title")
-    List<Post> findAllByTitle(String title);
+    List<Post> findAllByTitleIgnoreCase(String title);
 }

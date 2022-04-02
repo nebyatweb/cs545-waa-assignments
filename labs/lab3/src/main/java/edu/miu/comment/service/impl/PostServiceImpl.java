@@ -33,6 +33,6 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public List<PostDto> getPostsByTitle(String title) {
-        return (List<PostDto>)listMapperPostToDto.mapList(postRepo.findAllByTitle(title), new PostDto());
+        return (List<PostDto>)listMapperPostToDto.mapList(postRepo.findAllByTitleIgnoreCase(title), new PostDto());
     }
 }
