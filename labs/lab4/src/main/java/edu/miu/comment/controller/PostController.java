@@ -1,8 +1,8 @@
-package edu.miu.user.controller;
+package edu.miu.comment.controller;
 
-import edu.miu.user.domain.Post;
-import edu.miu.user.domain.dto.PostDto;
-import edu.miu.user.service.PostService;
+import edu.miu.comment.domain.Post;
+import edu.miu.comment.domain.dto.PostDto;
+import edu.miu.comment.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -22,7 +22,13 @@ public class PostController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public void addPosts(@RequestBody PostDto p) {
+    public void addPosts(@RequestBody Post p) {
         postService.addPost(p);
+    }
+
+    @GetMapping("/title")
+    public List<PostDto> getPostsByTitle(String s)
+    {
+        return postService.getPostsByTitle(s);
     }
 }

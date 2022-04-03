@@ -1,12 +1,12 @@
-package edu.miu.user.service.impl;
+package edu.miu.comment.service.impl;
 
-import edu.miu.user.domain.Post;
-import edu.miu.user.domain.User;
-import edu.miu.user.domain.dto.PostDto;
-import edu.miu.user.domain.dto.UserDto;
-import edu.miu.user.helper.ListMapper;
-import edu.miu.user.repo.UserRepo;
-import edu.miu.user.service.UserService;
+import edu.miu.comment.aspect.annotation.LogMe;
+import edu.miu.comment.domain.User;
+import edu.miu.comment.domain.dto.PostDto;
+import edu.miu.comment.domain.dto.UserDto;
+import edu.miu.comment.helper.ListMapper;
+import edu.miu.comment.repo.UserRepo;
+import edu.miu.comment.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,8 +25,9 @@ public class UserServiceImpl implements UserService {
     ModelMapper modelMapper;
 
     @Autowired
-    ListMapper<User,UserDto> listMapperUserToDto;
+    ListMapper<User, UserDto> listMapperUserToDto;
 
+    @LogMe
     @Override
     public List<UserDto> findAll() {
         return (List<UserDto>)listMapperUserToDto.mapList(userRepo.findAll(),new UserDto());
@@ -42,15 +43,17 @@ public class UserServiceImpl implements UserService {
         return modelMapper.map(userRepo.findById(id).get(), UserDto.class);
     }
 
-
-
     @Override
     public List<PostDto> findPostById(int id) {
         return listMapper.mapList(userRepo.findById(id).get().getPosts(), new PostDto());
     }
 
     @Override
-    public User getUserById(int id) {
-        return userRepo.findById(id).orElse(null);
+    public void delete(int id) {
+        userRepo.deleteById(id);
+    }
+
+    public List<UserDto> findUsersByNumberOfPosts(int n){
+        return listMapper.mapList(userRepo.findByPostsGreaterThan(n), new UserDto());
     }
 }

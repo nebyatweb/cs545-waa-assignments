@@ -1,4 +1,4 @@
-package edu.miu.user.domain;
+package edu.miu.comment.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,11 +17,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     private List<Post> posts;
-
-    public void addPost(Post p){
-        posts.add(p);
-    }
 }

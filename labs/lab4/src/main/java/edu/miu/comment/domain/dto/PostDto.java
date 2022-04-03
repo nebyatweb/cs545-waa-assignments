@@ -1,4 +1,4 @@
-package edu.miu.user.domain.dto;
+package edu.miu.comment.domain.dto;
 
 import lombok.Data;
 
@@ -8,5 +8,4 @@ public class PostDto {
     private String title;
     private String content;
     private String author;
-    private int userId;
 }

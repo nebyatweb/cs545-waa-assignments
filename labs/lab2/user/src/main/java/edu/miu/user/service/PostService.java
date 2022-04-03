@@ -8,5 +8,5 @@ import java.util.List;
 
 public interface PostService {
     List<PostDto> findAll();
-    void addPost(Post p);
+    void addPost(PostDto p);
 }

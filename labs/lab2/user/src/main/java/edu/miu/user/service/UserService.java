@@ -11,4 +11,5 @@ public interface UserService {
     void save(User u);
     UserDto findById(int id);
     List<PostDto> findPostById(int id);
+    User getUserById(int id);
 }
