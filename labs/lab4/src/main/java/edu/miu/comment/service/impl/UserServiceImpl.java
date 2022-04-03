@@ -1,6 +1,6 @@
 package edu.miu.comment.service.impl;
 
-import edu.miu.comment.aspect.annotation.LogMe;
+import edu.miu.comment.aspect.annotation.ExecutionTime;
 import edu.miu.comment.domain.User;
 import edu.miu.comment.domain.dto.PostDto;
 import edu.miu.comment.domain.dto.UserDto;
@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -27,7 +28,6 @@ public class UserServiceImpl implements UserService {
     @Autowired
     ListMapper<User, UserDto> listMapperUserToDto;
 
-    @LogMe
     @Override
     public List<UserDto> findAll() {
         return (List<UserDto>)listMapperUserToDto.mapList(userRepo.findAll(),new UserDto());
@@ -38,14 +38,23 @@ public class UserServiceImpl implements UserService {
         userRepo.save(u);
     }
 
+    @ExecutionTime
     @Override
     public UserDto findById(int id) {
-        return modelMapper.map(userRepo.findById(id).get(), UserDto.class);
+        Optional<User> optionalUser = userRepo.findById(id);
+        if(optionalUser.isPresent()) {
+            return  modelMapper.map(optionalUser.get(), UserDto.class);
+        }
+        return null;
     }
 
     @Override
     public List<PostDto> findPostById(int id) {
-        return listMapper.mapList(userRepo.findById(id).get().getPosts(), new PostDto());
+        Optional<User> optionalPost = userRepo.findById(id);
+        if(optionalPost.isPresent()) {
+            return listMapper.mapList(optionalPost.get().getPosts(), new PostDto());
+        }
+        return null;
     }
 
     @Override

@@ -20,29 +20,21 @@ public class LoggerAspect {
     @Autowired
     LoggerService loggerService;
 
-    @Pointcut("@annotation(edu.miu.comment.aspect.annotation.LogMe)")
+    @Pointcut("@annotation(edu.miu.comment.aspect.annotation.ExecutionTime)")
     public void logMeAnnotation(){ }
 
-    @Pointcut("execution(* edu.miu.comment.service.impl.CommentServiceImpl.*(..))")
-    public void logCommentService(){}
+    @Pointcut("execution(* edu.miu.comment.service.impl.CommentServiceImpl.*(..)) || " +
+            "execution(* edu.miu.comment.service.impl.UserServiceImpl.*(..)) || " +
+            "execution(* edu.miu.comment.service.impl.PostServiceImpl.*(..))")
+    public void logService(){}
 
-    @Pointcut("execution(* edu.miu.comment.service.impl.PostServiceImpl.*(..))")
-    public void logPostService(){}
+//    @Pointcut("execution(* edu.miu.comment.service.impl.PostServiceImpl.*(..))")
+//    public void logPostService(){}
+//
+//    @Pointcut("execution(* edu.miu.comment.service.impl.UserServiceImpl.*(..))")
+//    public void logUserService(){}
 
-    @Pointcut("execution(* edu.miu.comment.service.impl.UserServiceImpl.*(..))")
-    public void logUserService(){}
-
-    @Pointcut("execution(* edu.miu.comment.controller.CommentController.*(..))")
-    public void logCommentController(){}
-
-    @Pointcut("execution(* edu.miu.comment.controller.PostController.*(..))")
-    public void logPostController(){}
-
-    @Pointcut("execution(* edu.miu.comment.controller.UserController.*(..))")
-    public void logUserController(){}
-
-    @After("logCommentService() || logPostService() || logUserService() || " +
-            "logCommentController() || logPostController() || logUserController()")
+    @After("logService()")
     public void logAfter(JoinPoint joinPoint){
         Logger logger = new Logger();
         logger.setDate(LocalDate.now());

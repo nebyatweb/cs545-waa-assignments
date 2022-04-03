@@ -9,7 +9,9 @@ import org.springframework.context.annotation.Bean;
 public class CommentApplication {
 
 	public static void main(String[] args) {
+		System.out.println("Start");
 		SpringApplication.run(CommentApplication.class, args);
+		System.out.println("End");
 	}
 
 	@Bean
