@@ -25,7 +25,9 @@ public class LoggerAspect {
 
     @Pointcut("execution(* edu.miu.service.impl.CommentServiceImpl.*(..)) || " +
             "execution(* edu.miu.service.impl.UserServiceImpl.*(..)) || " +
-            "execution(* edu.miu.service.impl.PostServiceImpl.*(..))")
+            "execution(* edu.miu.service.impl.PostServiceImpl.*(..)) || " +
+            "execution(* edu.miu.service.impl.AuthServiceImpl.*(..)) || " +
+            "execution(* edu.miu.service.impl.AwesomeUserDetailsService.*(..))")
     public void logService(){}
 
 //    @Pointcut("execution(* edu.miu.comment.service.impl.PostServiceImpl.*(..))")

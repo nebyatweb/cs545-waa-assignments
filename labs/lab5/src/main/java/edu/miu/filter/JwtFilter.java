@@ -2,6 +2,7 @@ package edu.miu.filter;
 
 import edu.miu.util.JwtUtil;
 import io.jsonwebtoken.ExpiredJwtException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -18,12 +19,12 @@ import java.io.IOException;
 @Component
 public class JwtFilter extends OncePerRequestFilter {
 
-    private final JwtUtil jwtHelper;
+    private final JwtUtil jwtUtil;
 
     private final UserDetailsService userDetailsService;
 
-    public JwtFilter(JwtUtil jwtHelper, UserDetailsService userDetailsService) {
-        this.jwtHelper = jwtHelper;
+    public JwtFilter(JwtUtil jwtUtil, UserDetailsService userDetailsService) {
+        this.jwtUtil = jwtUtil;
         this.userDetailsService = userDetailsService;
     }
 
@@ -39,8 +40,8 @@ public class JwtFilter extends OncePerRequestFilter {
         if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
             token = authorizationHeader.substring(7);
             try{
-                email = jwtHelper.getUsernameFromToken(token);
-            }catch (ExpiredJwtException e){
+                email = jwtUtil.getUsernameFromToken(token);
+            }catch (ExpiredJwtException e){ // TODO come back here!
                 String isRefreshToken = request.getHeader("isRefreshToken");
             }
 
@@ -48,7 +49,7 @@ public class JwtFilter extends OncePerRequestFilter {
 
         if (email != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             var userDetails = userDetailsService.loadUserByUsername(email);
-            boolean isTokenValid = jwtHelper.validateToken(token);
+            boolean isTokenValid = jwtUtil.validateToken(token);
             if (isTokenValid) {
                 UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
                         userDetails, null, userDetails.getAuthorities());

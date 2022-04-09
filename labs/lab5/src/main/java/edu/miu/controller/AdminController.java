@@ -12,14 +12,17 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/admin")
-@RequiredArgsConstructor
+//@RequiredArgsConstructor
 public class AdminController {
 
-    private final UserService userService;
+//    private final UserService userService;
 
     @GetMapping
 //    @PreAuthorize("hasRole('ADMIN')")
-    public List<UserDto> getUsers() {
-        return userService.findAll();
+//    public List<UserDto> getUsers() {
+//        return userService.findAll();
+//    }
+    public String getAdminPage(){
+        return "This is the admin page";
     }
 }
