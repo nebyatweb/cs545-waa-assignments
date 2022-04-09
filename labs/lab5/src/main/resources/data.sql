@@ -8,7 +8,7 @@ VALUES (3, 'dean@miu.edu', 'Dean', 'Altarawneh', '$2a$12$IKEQb00u5QpZMx4v5zMweu.
 INSERT INTO role (id, role)
 VALUES (1, 'ADMIN');
 INSERT INTO role (id, role)
-VALUES (2, 'CLIENT');
+VALUES (2, 'USER');
 
 
 INSERT INTO users_roles (user_id, roles_id)
