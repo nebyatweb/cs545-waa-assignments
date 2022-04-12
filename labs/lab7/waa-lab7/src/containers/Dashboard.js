@@ -1,9 +1,7 @@
 import Posts from "../components/Posts";
 import {useState} from 'react';
-import NewPost from "../components/NewPost"
 
 export default function Dashboard() {
-    let i = 114;
     const [postsState, setPostsState] = useState(
         [
             {id: 111, title: "Happiness", author: "John"},
@@ -13,38 +11,28 @@ export default function Dashboard() {
         ]
     );
 
-    const [postState, setPostState] = useState(
-        {
-            title: "",
-            author: ""
-        }
-        
-    )
+    const [title, setTitle] = useState('')
 
-    const onChange = (events) => {
-        const copy = { ...postState };
-        copy[events.target.title] = events.target.value;
-        setPostState(copy);
+    const [postState, setPostState] = useState({})
+
+    const updateName = () => {
+        let newPost = [...postsState]
+        newPost[0].title = title;
+        setPostsState(newPost);
     }
 
-    const addButtonClicked = () => {
-        const copy = { ...postState };
-        copy.id = i;
-        i++;
-        const copyPostsState = [...postsState]
-        copyPostsState.push(copy);
-        setPostsState(copyPostsState);
+    const updateButtonClicked = (id) => {
+        let postObj = postsState.find( s => s.id == id);
+        setPostState(postObj);
     }
 
     return (
         <div>
-            <Posts posts={postsState} />
-            <NewPost
-                title={postState.title}
-                author={postState.author}
-                onChange={(event) => { onChange(event) }}
-                addButtonClicked={addButtonClicked}
-            />
+            <Posts posts={postsState} postState = {(id) => updateButtonClicked(id)} />
+            <div className="updateTitle">
+                <input type="text" value={title} onChange = {e => setTitle(e.target.value)} />
+                <button onClick={updateName}>Change Name</button>
+            </div>
         </div>
     )
 }
