@@ -1,0 +1,9 @@
+.Content{
+    display: inline-block;
+    margin-top: 100px;
+    border: 1px solid;
+    margin-right: 10px;
+    background-color: #578cdb;
+    color: white;
+    padding: 20px;
+}
