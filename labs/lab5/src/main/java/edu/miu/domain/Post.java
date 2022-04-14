@@ -21,4 +21,7 @@ public class Post {
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "post_id")
     private List<Comment> comments;
+
+    @ManyToOne
+    private User user;
 }

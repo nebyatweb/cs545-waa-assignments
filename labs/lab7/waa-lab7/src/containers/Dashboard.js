@@ -1,38 +1,31 @@
 import Posts from "../components/Posts";
 import {useState} from 'react';
 
-export default function Dashboard() {
-    const [postsState, setPostsState] = useState(
-        [
-            {id: 111, title: "Happiness", author: "John"},
-            {id: 112, title: "MIU", author: "Dean"},
-            {id: 113, title: "Enjoy Life", author: "Jasmine"}
-
-        ]
-    );
-
-    const [title, setTitle] = useState('')
-
-    const [postState, setPostState] = useState({})
-
-    const updateName = () => {
-        let newPost = [...postsState]
-        newPost[0].title = title;
-        setPostsState(newPost);
+const Dashboard = () => {
+    const [fetchFlag, setFetchflag] = useState(true);    
+    const [clickedItemId, setClickedItemId] = useState(0)
+ 
+    
+    const handleClickedItem = (id) =>{
+        setClickedItemId(id)        
     }
 
-    const updateButtonClicked = (id) => {
-        let postObj = postsState.find( s => s.id == id);
-        setPostState(postObj);
+    const changeFetchFlag = () =>{
+       setFetchflag(!fetchFlag)
     }
 
-    return (
-        <div>
-            <Posts posts={postsState} postState = {(id) => updateButtonClicked(id)} />
-            <div className="updateTitle">
-                <input type="text" value={title} onChange = {e => setTitle(e.target.value)} />
-                <button onClick={updateName}>Change Name</button>
-            </div>
-        </div>
-    )
+  return (
+    <div>        
+        <Posts clickedItem = {handleClickedItem} fetchFlag={fetchFlag}/>        
+        <AddPost changeFetchFlag={changeFetchFlag} />
+        {
+            clickedItemId !== 0  &&
+            <PostDetail postId={clickedItemId}  changeFetchFlag={changeFetchFlag}  />
+        }
+        
+        
+    </div>
+  )
 }
+
+export default Dashboard;
