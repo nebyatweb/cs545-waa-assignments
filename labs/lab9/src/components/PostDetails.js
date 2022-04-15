@@ -4,7 +4,7 @@ import './postdetails.css'
 
 const PostDetails = (props) => {
     const handleDelete = (id) => {
-        axios.delete('http://localhost:8080/api/v1/posts/' + id).then(res => {
+        axios.delete('http://localhost:8080/api/v1/users/1/posts/' + id).then(res => {
             props.changeFetchFlag();
         }).catch(error => {
             console.error(error);

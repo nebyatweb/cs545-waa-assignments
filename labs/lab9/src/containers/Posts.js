@@ -4,11 +4,11 @@ import Post from "../components/Post";
 
 const Posts = (props) => {
     const [posts, setPosts] = useState([
-        {id: 0, title:"", content: "", author: ""}
+        {id: 0, title:"", content: "", author: "", index: 0}
     ]);
 
     const fetchPosts = () => {
-        axios.get('http://localhost:8080/api/v1/posts').then(res => {
+        axios.get('http://localhost:8080/api/v1/users/1/posts').then(res => {
             setPosts(res.data)
         }).catch(error => console.log(error))
     }
@@ -23,6 +23,7 @@ const Posts = (props) => {
                       id={post.id} 
                       title={post.title} 
                       key={post.id}
+                      index={post.index}
                       content={post.content}
                       setSelected={() => {
                          props.setSelected(post.id)

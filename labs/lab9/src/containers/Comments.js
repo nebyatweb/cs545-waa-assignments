@@ -7,7 +7,7 @@ const Comments = (props) => {
     const [postComments, setPostComments] = useState({});
     useEffect( () =>{
         if(props.id !== 0)
-            axios.get('http://localhost:8080/api/v1/comments/' + props.id)
+            axios.get('http://localhost:8080/api/v1/users/1/posts/' + props.id + '/comments')
                  .then(res => {
                      setPostComments(res.data)
                  }).catch(error => console.log(error))

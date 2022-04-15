@@ -8,6 +8,7 @@ const NewPost = (props) => {
 
     const handleClick = () => {
         const form = newPostForm.current;
+
         const data = {
             title: form['title'].value,
             content: form['content'].value,
@@ -15,7 +16,7 @@ const NewPost = (props) => {
         }
         if(data.title === '' && data.content=== '' && data.author === '')
         return 
-            axios.post('http://localhost:8080/api/v1/posts', data).then(res => {
+            axios.post('http://localhost:8080/api/v1/users/1/posts', data).then(res => {
                 form['title'].value=''
                 form['content'].value='' 
                 form['author'].value=''
